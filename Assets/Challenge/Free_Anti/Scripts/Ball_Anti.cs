@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class Ball_Anti : MonoBehaviour
 {
-    public float speed = 7;
+    float speed = 15;
     Rigidbody rb;
 
 
@@ -19,12 +19,8 @@ public class Ball_Anti : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
+            if (GameManager_Anti.gameSet || !GameManager_Anti.Initialized) return;
             rb.velocity = new Vector3(speed, 0, speed);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.W)) 
-        {
-            rb.AddForce(new Vector3(Random.Range(0, 360), 0, Random.Range(0, 360)).normalized * 700);
         }
         
         if (!GameManager_Anti.Initialized && GameManager_Anti.blockCount == 0)
@@ -37,12 +33,11 @@ public class Ball_Anti : MonoBehaviour
             }
         }
 
-        if (!GameManager_Anti.gameSet) return;
-
+        if (GameManager_Anti.gameSet) return;
         // åªç›ÇÃë¨ìxÇéÊìæ
         Vector3 velocity = rb.velocity;
         // (speed Å` speed * 1.5) ÇÃîÕàÕì‡Ç…ï‚ê≥ÇµÇΩë¨ìxÇåvéZ
-        float clampedSpeed = Mathf.Clamp(velocity.magnitude, speed, speed * 1.2f);
+        float clampedSpeed = Mathf.Clamp(velocity.magnitude, speed, speed * 1.5f);
         // ë¨ìxÇîΩâf
         rb.velocity = velocity.normalized * clampedSpeed;
     }
@@ -65,6 +60,13 @@ public class Ball_Anti : MonoBehaviour
             rb.velocity = direction * speed;
         }
     }
+
+
+    private void OnCollisionExit(Collision collision)
+    {
+        rb.AddForce(new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2)) * 70);
+    }
+
 
     void Init()
     {

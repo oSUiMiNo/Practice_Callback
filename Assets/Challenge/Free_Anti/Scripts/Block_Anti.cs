@@ -20,10 +20,8 @@ public class Block_Anti : MonoBehaviour
     {
         if (!GameManager_Anti.Initialized && GameManager_Anti.blockCount == 0)
         {
-            Debug.Log(GameManager_Anti.timer);
             if (GameManager_Anti.timer >= 3)
             {
-                Debug.Log("bbb1");
                 Init();
             }
         }
@@ -40,7 +38,6 @@ public class Block_Anti : MonoBehaviour
 
     void Init()
     {
-
         renderer.enabled = true;
         collider.enabled = true;
     }

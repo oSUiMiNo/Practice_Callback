@@ -10,7 +10,9 @@ public class DisplayManager_Anti : MonoBehaviour
 
     void Start()
     {
-        GetGameObjects();
+        text_GameSet = GameObject.Find("Text_GameSet");
+        text_SpaceToStart = GameObject.Find("Text_SpaceToStart");
+        
         Init();
     }
 
@@ -31,13 +33,6 @@ public class DisplayManager_Anti : MonoBehaviour
         {
             text_SpaceToStart.SetActive(false);
         }
-    }
-
-
-    void GetGameObjects()
-    {
-        text_GameSet = GameObject.Find("Text_GameSet");
-        text_SpaceToStart = GameObject.Find("Text_SpaceToStart");
     }
 
 

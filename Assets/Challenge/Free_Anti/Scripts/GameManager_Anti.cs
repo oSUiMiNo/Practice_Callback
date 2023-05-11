@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class GameManager_Anti : MonoBehaviour
 {
-    public static int blockCount = 16;
-    
+    public static int blockCount = 9;
     public static bool gameSet = false;
-
     public static bool Initialized = false;
-
 
 
     void Start()
@@ -26,7 +23,6 @@ public class GameManager_Anti : MonoBehaviour
             timer += Time.deltaTime;
             if(timer >= 0.3)
             {
-                Debug.Log("aaa1");
                 Exit();
             }
         }
@@ -34,9 +30,8 @@ public class GameManager_Anti : MonoBehaviour
         if( !Initialized && blockCount == 0 )
         {
             timer += Time.deltaTime;
-            if (timer >= 4)
+            if (timer >= 3.5)
             {
-                Debug.Log("aaa2");
                 timer = 0;
                 Init();
             }
@@ -46,15 +41,13 @@ public class GameManager_Anti : MonoBehaviour
 
     void Init()
     {
-        Debug.Log("aaa3");
-        blockCount = 16;
+        blockCount = 9;
         gameSet = false;
         Initialized = true;
     }
 
     void Exit()
     {
-        Debug.Log("aaa4");
         gameSet = true;
         Initialized = false;
     }
