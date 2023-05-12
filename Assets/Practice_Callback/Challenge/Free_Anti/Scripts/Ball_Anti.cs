@@ -6,6 +6,7 @@ using UnityEngine;
 public class Ball_Anti : MonoBehaviour
 {
     float speed = 15;
+    bool isMoving = false;
     Rigidbody rb;
 
 
@@ -19,8 +20,14 @@ public class Ball_Anti : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if (GameManager_Anti.gameSet || !GameManager_Anti.Initialized) return;
-            rb.velocity = new Vector3(speed, 0, speed);
+            if (!isMoving)
+            {
+                if (!GameManager_Anti.gameSet && GameManager_Anti.Initialized)
+                {
+                    rb.velocity = new Vector3(speed, 0, speed);
+                    isMoving = true;
+                }
+            }
         }
         
         if (!GameManager_Anti.Initialized && GameManager_Anti.blockCount == 0)
@@ -71,5 +78,6 @@ public class Ball_Anti : MonoBehaviour
     void Init()
     {
         transform.position = new Vector3(0, 1.4f, -6.5f);
+        isMoving = false;
     }
 }
